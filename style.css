@@ -1,1 +1,318 @@
+/* =========================================================
+   GLOBAL RESET
+========================================================= */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0b1220;
+    color: #e5e7eb;
+    min-height: 100vh;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+.hidden { display: none !important; }
+.page-section { display: none; }
+.active-section { display: block; }
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* =========================================================
+   SIDEBAR (Institutional Neutral)
+========================================================= */
+.sidebar {
+    width: 240px;
+    background: #0f172a;
+    padding: 32px 22px;
+    border-right: 1px solid #1e293b;
+}
+
+.logo-text {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin-bottom: 40px;
+    display: block;
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li {
+    padding: 12px 14px;
+    margin-bottom: 6px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #94a3b8;
+    transition: background 0.2s ease;
+}
+
+.sidebar li:hover {
+    background: #1e293b;
+    color: #f1f5f9;
+}
+
+.sidebar li.active {
+    background: #1e40af;
+    color: #ffffff;
+}
+
+/* =========================================================
+   MAIN CONTENT
+========================================================= */
+.main-content {
+    flex: 1;
+    padding-bottom: 60px;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+.dashboard-header {
+    padding: 40px 6%;
+    border-bottom: 1px solid #1e293b;
+}
+
+.dashboard-header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+/* =========================================================
+   CARD SYSTEM (Report Blocks)
+========================================================= */
+.card {
+    background: #111827;
+    padding: 34px;
+    border-radius: 8px;
+    margin: 40px 6%;
+    border: 1px solid #1f2937;
+}
+
+.card h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 24px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+    color: #cbd5e1;
+}
+
+.card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: #e2e8f0;
+}
+
+/* =========================================================
+   STRUCTURED BLOCKS
+========================================================= */
+.structured-block {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid #1f2937;
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+/* =========================================================
+   INPUT GRID
+========================================================= */
+.grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.grid label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: #94a3b8;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.grid input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #1f2937;
+    background: #0b1220;
+    color: #f8fafc;
+    font-size: 13px;
+}
+
+.grid input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+.btn-primary {
+    padding: 12px 18px;
+    background: #1e40af;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+}
+
+/* =========================================================
+   EXECUTIVE SUMMARY TEXT
+========================================================= */
+#financialPositionSummary p {
+    margin-bottom: 6px;
+    font-size: 14px;
+}
+
+#financialClassification {
+    font-size: 15px;
+    font-weight: 600;
+    color: #facc15;
+}
+
+#executiveCommentary {
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+/* =========================================================
+   INSIGHT ENGINE
+========================================================= */
+#insightEngine p {
+    background: #0b1220;
+    padding: 14px 16px;
+    border-radius: 6px;
+    border-left: 3px solid #1e40af;
+    margin-bottom: 10px;
+    font-size: 13px;
+}
+
+/* =========================================================
+   FORECAST BLOCKS
+========================================================= */
+.forecast-block {
+    margin-bottom: 50px;
+}
+
+.forecast-block canvas {
+    height: 280px !important;
+    margin-bottom: 16px;
+}
+
+.forecast-block div {
+    font-size: 13px;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+}
+
+/* =========================================================
+   PERFORMANCE MATRIX
+========================================================= */
+#businessHealthIndex {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fbbf24;
+}
+
+#matrixInterpretation {
+    font-size: 14px;
+    margin-top: 8px;
+    color: #cbd5e1;
+}
+
+/* =========================================================
+   RISK ASSESSMENT
+========================================================= */
+#stabilityRisk,
+#marginRisk,
+#liquidityRisk {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+#stabilityRisk {
+    color: #38bdf8;
+}
+
+#marginRisk {
+    color: #f97316;
+}
+
+#liquidityRisk {
+    color: #22c55e;
+}
+
+/* =========================================================
+   CHARTS
+========================================================= */
+.chart-card {
+    margin-bottom: 40px;
+}
+
+.chart-card canvas {
+    height: 300px !important;
+}
+
+.chart-explanation {
+    font-size: 12.5px;
+    color: #94a3b8;
+    margin-top: 12px;
+    border-top: 1px solid #1f2937;
+    padding-top: 10px;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+.dashboard-footer {
+    text-align: center;
+    padding: 40px;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 900px) {
+
+    .sidebar {
+        display: none;
+    }
+
+    .card {
+        margin: 30px 20px;
+    }
+
+    .dashboard-header {
+        padding: 30px 20px;
+    }
+}
 
