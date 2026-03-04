@@ -367,12 +367,14 @@ function sum(key){
     return businessData.reduce((a,b)=>a+(b[key]||0),0);
 }
 
-/* ================= NAVIGATION ================= */
+/* ================= NAVIGATION (FIXED) ================= */
 
 function showSection(sectionId, event) {
+
     document.querySelectorAll(".page-section").forEach(sec =>
         sec.classList.remove("active-section")
     );
+
     document.getElementById(sectionId)?.classList.add("active-section");
 
     document.querySelectorAll(".sidebar li").forEach(li =>
@@ -380,10 +382,28 @@ function showSection(sectionId, event) {
     );
 
     if (event) event.target.classList.add("active");
+
+    setTimeout(()=>{
+        if(sectionId==="forecast") renderForecasts();
+        if(sectionId==="matrix") renderPerformanceMatrix();
+        if(sectionId==="risk") renderRiskAssessment();
+    },100);
+
 }
 
-function logout() {
-    location.reload();
+/* ================= LOGOUT ================= */
+
+async function logout() {
+
+    try {
+        if (window.supabaseClient) {
+            await window.supabaseClient.auth.signOut();
+        }
+    } catch (err) {
+        console.error("Logout error:", err);
+    }
+
+    window.location.href = "login.html";
 }
 
 /* ================= GLOBAL BINDING ================= */
