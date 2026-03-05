@@ -36,6 +36,40 @@ grid-template-columns:1fr;
 }
 }
 
+/* ================= MONTHLY RECORD TABLE ================= */
+
+.records-table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+.records-table th,
+.records-table td{
+padding:12px;
+text-align:left;
+border-bottom:1px solid #1f2937;
+}
+
+.records-table th{
+color:#94a3b8;
+font-weight:600;
+font-size:14px;
+}
+
+.records-table td{
+font-size:14px;
+}
+
+.progress-box{
+margin-top:20px;
+padding:15px;
+background:#0f172a;
+border:1px solid #1e293b;
+border-radius:8px;
+font-size:14px;
+}
+
 </style>
 
 </head>
@@ -186,6 +220,34 @@ ImpactGrid Financial Stability Regime Model (IFSRM)
 
 </section>
 
+<!-- ================= NEW: MONTHLY RECORD TABLE ================= -->
+
+<section class="card">
+
+<h2>Monthly Financial Records</h2>
+
+<table class="records-table">
+<thead>
+<tr>
+<th>Month</th>
+<th>Revenue</th>
+<th>Expenses</th>
+<th>Profit</th>
+</tr>
+</thead>
+
+<tbody id="recordsTableBody">
+</tbody>
+
+</table>
+
+<div class="progress-box" id="dataProgress">
+0 / 3 months entered<br>
+Enter at least 3 months of financial data to activate ImpactGrid Insights.
+</div>
+
+</section>
+
 <section class="card">
 
 <h2>Executive Financial Summary</h2>
@@ -329,7 +391,7 @@ ImpactGrid Financial Stability Regime Model (IFSRM)
 
 <script>
 
-/* ================= SIDEBAR TOGGLE (MOBILE FIX) ================= */
+/* ================= SIDEBAR TOGGLE ================= */
 
 function toggleSidebar(){
 
