@@ -68,8 +68,8 @@ function updateAll(){
 
     if(businessData.length===0) return;
 
-    renderRecordsTable();          // NEW
-    updateProgressIndicator();     // NEW
+    renderRecordsTable();
+    updateProgressIndicator();
 
     renderExecutiveSummary();
     renderLifecycle();
@@ -159,6 +159,7 @@ function resetAdvancedSections(){
     setText("stabilityRisk","Awaiting data...");
     setText("marginRisk","");
     setText("liquidityRisk","");
+    setText("riskInsight","");
 
     performanceBarChart?.destroy();
     distributionPieChart?.destroy();
@@ -392,16 +393,40 @@ function renderRiskAssessment(){
         setText("stabilityRisk","Enter at least 3 months of data.");
         setText("marginRisk","");
         setText("liquidityRisk","");
+        setText("riskInsight","");
 
         return;
     }
 
     const volatility=calculateVolatility();
     const margin=getMargin();
+    const growth=calculateMonthlyGrowth();
 
-    setText("stabilityRisk",volatility>35?"Elevated":"Low");
-    setText("marginRisk",margin<8?"Elevated":"Low");
-    setText("liquidityRisk",margin>5?"Stable":"Constrained");
+    const stability = volatility>35?"Elevated":"Low";
+    const marginStatus = margin<8?"Elevated":"Low";
+    const liquidity = margin>5?"Stable":"Constrained";
+
+    setText("stabilityRisk",stability);
+    setText("marginRisk",marginStatus);
+    setText("liquidityRisk",liquidity);
+
+    /* ===== AI STYLE RISK INSIGHT ===== */
+
+    let insight="Operational risk currently appears manageable.";
+
+    if(volatility>35){
+        insight="Revenue volatility indicates fluctuating income patterns which may expose the business to short-term cash flow pressure.";
+    }
+
+    if(margin<8){
+        insight+=" Profit margins are compressed, suggesting cost pressure on operations.";
+    }
+
+    if(growth>12){
+        insight+=" Revenue growth remains strong which supports long-term stability if sustained.";
+    }
+
+    setText("riskInsight", insight);
 }
 
 /* ================= CORE CHARTS ================= */
