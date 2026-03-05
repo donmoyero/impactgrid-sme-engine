@@ -44,11 +44,9 @@ grid-template-columns:1fr;
 
 <div id="app" class="app-layout">
 
-<button class="mobile-toggle" onclick="toggleSidebar()">☰</button>
-
 <aside class="sidebar" id="sidebar">
 
-<div class="logo-container">
+<div class="logo-container" onclick="toggleSidebar()" style="cursor:pointer;">
 <img src="logo.png" alt="ImpactGrid Logo" class="logo-img">
 
 <div>
@@ -86,7 +84,6 @@ Risk Assessment
 </ul>
 </nav>
 
-<!-- THEME TOGGLE -->
 <div class="theme-toggle" onclick="toggleTheme()">
 Toggle Theme
 </div>
@@ -332,15 +329,35 @@ ImpactGrid Financial Stability Regime Model (IFSRM)
 
 <script>
 
+/* ================= SIDEBAR TOGGLE (MOBILE FIX) ================= */
+
 function toggleSidebar(){
-document.getElementById("sidebar").classList.toggle("active-mobile");
+
+const sidebar = document.getElementById("sidebar");
+
+if(window.innerWidth <= 900){
+
+sidebar.classList.toggle("active-mobile");
+
+}else{
+
+sidebar.classList.toggle("collapsed");
+
 }
 
-/* THEME TOGGLE */
+}
+
+/* ================= THEME TOGGLE ================= */
 
 function toggleTheme(){
+
 document.body.classList.toggle("light-mode");
-localStorage.setItem("theme", document.body.classList.contains("light-mode") ? "light" : "dark");
+
+localStorage.setItem(
+"theme",
+document.body.classList.contains("light-mode") ? "light" : "dark"
+);
+
 }
 
 if(localStorage.getItem("theme")==="light"){
