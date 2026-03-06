@@ -80,23 +80,21 @@ body.light-mode .sidebar li:hover {
     background: #0f172a;
     padding: 36px 24px;
     border-right: 1px solid #1e293b;
-
     display: flex;
     flex-direction: column;
-
     transition: width 0.25s ease;
 }
 
-.sidebar.collapsed{
-    width:70px;
-    overflow:hidden;
+.sidebar.collapsed {
+    width: 70px;
+    overflow: hidden;
 }
 
 .sidebar.collapsed nav,
 .sidebar.collapsed .theme-toggle,
 .sidebar.collapsed button,
-.sidebar.collapsed .logo-text{
-    display:none;
+.sidebar.collapsed .logo-text {
+    display: none;
 }
 
 /* ================= LOGO ================= */
@@ -329,17 +327,17 @@ body.light-mode .theme-toggle {
 /* Light mode table */
 
 body.light-mode .records-table th,
-body.light-mode .records-table td{
-    border-bottom:1px solid #e2e8f0;
+body.light-mode .records-table td {
+    border-bottom: 1px solid #e2e8f0;
 }
 
-body.light-mode .records-table tr:hover{
-    background:#f1f5f9;
+body.light-mode .records-table tr:hover {
+    background: #f1f5f9;
 }
 
-body.light-mode .progress-box{
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
+body.light-mode .progress-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
 }
 
 /* =========================================================
@@ -376,29 +374,29 @@ canvas {
 
 @media (max-width: 900px) {
 
-    .sidebar{
-        width:70px;
-        padding:20px 10px;
-        overflow:hidden;
+    .sidebar {
+        width: 70px;
+        padding: 20px 10px;
+        overflow: hidden;
     }
 
-    .sidebar.active-mobile{
-        width:250px;
-        padding:36px 24px;
+    .sidebar.active-mobile {
+        width: 250px;
+        padding: 36px 24px;
     }
 
     .sidebar:not(.active-mobile) nav,
     .sidebar:not(.active-mobile) .theme-toggle,
     .sidebar:not(.active-mobile) button,
-    .sidebar:not(.active-mobile) .logo-text{
-        display:none;
+    .sidebar:not(.active-mobile) .logo-text {
+        display: none;
     }
 
     .sidebar.active-mobile nav,
     .sidebar.active-mobile .theme-toggle,
     .sidebar.active-mobile button,
-    .sidebar.active-mobile .logo-text{
-        display:block;
+    .sidebar.active-mobile .logo-text {
+        display: block;
     }
 
     .card {
@@ -415,4 +413,54 @@ canvas {
         height: 260px;
     }
 
+}
+
+/* =========================================================
+   AI CHAT ENHANCEMENTS
+========================================================= */
+
+.ai-chat-output {
+    height: 220px;
+    overflow-y: auto;
+    background: #0b1220;
+    border: 1px solid #1f2937;
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 12px;
+    font-size: 13px;
+}
+
+.ai-user {
+    background: #1e40af;
+    padding: 8px 12px;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    display: inline-block;
+}
+
+.ai-response {
+    background: #1f2937;
+    padding: 10px 12px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+#aiForecastExplanation {
+    margin-top: 15px;
+    padding: 16px;
+    background: #0b1220;
+    border: 1px solid #1f2937;
+    border-radius: 6px;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+#aiInsights {
+    background: #0b1220;
+    border: 1px solid #1f2937;
+    padding: 20px;
+    border-radius: 6px;
+    line-height: 1.7;
+    font-size: 13px;
 }
