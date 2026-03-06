@@ -15,107 +15,6 @@
 
 <link rel="stylesheet" href="./style.css">
 
-<style>
-
-/* ================= MATRIX LAYOUT FIX ================= */
-
-.matrix-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-margin-top:20px;
-}
-
-.matrix-grid .chart-card{
-height:350px;
-}
-
-@media(max-width:900px){
-.matrix-grid{
-grid-template-columns:1fr;
-}
-}
-
-/* ================= MONTHLY RECORD TABLE ================= */
-
-.records-table{
-width:100%;
-border-collapse:collapse;
-margin-top:20px;
-}
-
-.records-table th,
-.records-table td{
-padding:12px;
-text-align:left;
-border-bottom:1px solid #1f2937;
-}
-
-.records-table th{
-color:#94a3b8;
-font-weight:600;
-font-size:14px;
-}
-
-.records-table td{
-font-size:14px;
-}
-
-.progress-box{
-margin-top:20px;
-padding:15px;
-background:#0f172a;
-border:1px solid #1e293b;
-border-radius:8px;
-font-size:14px;
-}
-
-/* ================= AI CHAT ================= */
-
-.ai-chat{
-margin-top:30px;
-border:1px solid #1e293b;
-border-radius:10px;
-padding:20px;
-background:#0f172a;
-}
-
-.ai-chat-output{
-height:200px;
-overflow-y:auto;
-border:1px solid #1e293b;
-padding:15px;
-border-radius:8px;
-margin-bottom:15px;
-font-size:14px;
-}
-
-.ai-user{
-color:#38bdf8;
-margin-bottom:8px;
-}
-
-.ai-response{
-color:#e2e8f0;
-margin-bottom:12px;
-}
-
-.ai-chat-input{
-display:flex;
-gap:10px;
-}
-
-.ai-chat-input input{
-flex:1;
-padding:10px;
-border-radius:6px;
-border:1px solid #1e293b;
-background:#020617;
-color:white;
-}
-
-</style>
-
 </head>
 
 <body>
@@ -131,7 +30,7 @@ color:white;
 <span class="logo-text">ImpactGrid</span>
 
 <div style="font-size:12px;color:#64748b;margin-top:4px;letter-spacing:0.5px;">
-Engine v2
+Engine v3
 </div>
 </div>
 </div>
@@ -145,10 +44,6 @@ Financial Overview
 
 <li onclick="showSection('charts', event)">
 Operational Charts
-</li>
-
-<li onclick="showSection('forecast', event)">
-Forecast Horizons
 </li>
 
 <li onclick="showSection('matrix', event)">
@@ -235,8 +130,6 @@ ImpactGrid Financial Stability Regime Model (IFSRM)
 
 </div>
 
-<div id="lifecycleClassification" style="margin-top:20px;"></div>
-
 </section>
 
 <section class="card">
@@ -287,26 +180,7 @@ ImpactGrid Financial Stability Regime Model (IFSRM)
 </table>
 
 <div class="progress-box" id="dataProgress">
-0 / 3 months entered<br>
-Enter at least 3 months of financial data to activate ImpactGrid Insights.
-</div>
-
-</section>
-
-<section class="card">
-
-<h2>Executive Financial Summary</h2>
-
-<div id="financialPositionSummary"></div>
-
-<div class="structured-block">
-<h3>Financial Status Classification</h3>
-<div id="financialClassification"></div>
-</div>
-
-<div class="structured-block">
-<h3>Structured Commentary</h3>
-<div id="executiveCommentary"></div>
+0 / 3 months entered
 </div>
 
 </section>
@@ -337,23 +211,6 @@ Enter at least 3 months of financial data to activate ImpactGrid Insights.
 
 </section>
 
-<!-- ================= FORECAST ================= -->
-
-<section id="forecast" class="page-section">
-
-<section class="card">
-
-<h2>Forecast Horizons</h2>
-
-<canvas id="forecast6m"></canvas>
-<canvas id="forecast1y"></canvas>
-<canvas id="forecast3y"></canvas>
-<canvas id="forecast5y"></canvas>
-
-</section>
-
-</section>
-
 <!-- ================= MATRIX ================= -->
 
 <section id="matrix" class="page-section">
@@ -376,7 +233,7 @@ Enter at least 3 months of financial data to activate ImpactGrid Insights.
 
 <div class="structured-block">
 <h3>Composite Business Health Index</h3>
-<div id="businessHealthIndex">Awaiting analysis...</div>
+<div id="businessHealthIndex"></div>
 </div>
 
 </section>
@@ -423,33 +280,6 @@ Enter at least 3 months of financial data to activate ImpactGrid Insights.
 
 <h2>ImpactGrid AI Intelligence</h2>
 
-<div class="structured-block">
-<h3>Financial Overview Insight</h3>
-<div id="aiFinancial"></div>
-</div>
-
-<div class="structured-block">
-<h3>Operational Performance Insight</h3>
-<div id="aiOperations"></div>
-</div>
-
-<div class="structured-block">
-<h3>Forecast Interpretation</h3>
-<div id="aiForecast"></div>
-</div>
-
-<div class="structured-block">
-<h3>Performance Analysis</h3>
-<div id="aiPerformance"></div>
-</div>
-
-<div class="structured-block">
-<h3>Risk Interpretation</h3>
-<div id="aiRisk"></div>
-</div>
-
-<!-- ===== AI CHAT ===== -->
-
 <div class="ai-chat">
 
 <h3>ImpactGrid AI Analyst</h3>
@@ -460,6 +290,18 @@ Enter at least 3 months of financial data to activate ImpactGrid Insights.
 <input id="aiChatInput" placeholder="Ask ImpactGrid AI about your business...">
 <button class="btn-primary" onclick="askImpactGridAI()">Ask</button>
 </div>
+
+</div>
+
+<div class="structured-block">
+
+<h3>AI Projection Engine</h3>
+
+<div class="chart-card" style="height:350px;">
+<canvas id="aiForecastChart"></canvas>
+</div>
+
+<div id="aiForecastExplanation"></div>
 
 </div>
 
@@ -474,46 +316,8 @@ Enter at least 3 months of financial data to activate ImpactGrid Insights.
 </main>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="supabase.js"></script>
-<script src="auth.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script src="script.js"></script>
-
-<script>
-
-function toggleSidebar(){
-
-const sidebar = document.getElementById("sidebar");
-
-if(window.innerWidth <= 900){
-
-sidebar.classList.toggle("active-mobile");
-
-}else{
-
-sidebar.classList.toggle("collapsed");
-
-}
-
-}
-
-function toggleTheme(){
-
-document.body.classList.toggle("light-mode");
-
-localStorage.setItem(
-"theme",
-document.body.classList.contains("light-mode") ? "light" : "dark"
-);
-
-}
-
-if(localStorage.getItem("theme")==="light"){
-document.body.classList.add("light-mode");
-}
-
-</script>
 
 </body>
 </html>
