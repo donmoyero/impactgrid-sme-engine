@@ -11,12 +11,15 @@ let performanceBarChart = null;
 let distributionPieChart = null;
 let aiForecastChart = null;
 
+let aiChatHistory = [];
+
 
 /* ================= INIT ================= */
 
 document.addEventListener("DOMContentLoaded", () => {
 
-bindGlobalFunctions();
+    bindGlobalFunctions();
+    renderAIInsights();
 
 });
 
@@ -24,19 +27,15 @@ bindGlobalFunctions();
 /* ================= CURRENCY ================= */
 
 function setCurrency(currency){
-
 currentCurrency = currency;
 updateAll();
-
 }
 
 function formatCurrency(val){
-
 return new Intl.NumberFormat(undefined,{
 style:"currency",
 currency:currentCurrency
 }).format(val);
-
 }
 
 
@@ -71,6 +70,7 @@ function updateAll(){
 renderRecordsTable();
 updateProgressIndicator();
 renderCoreCharts();
+renderAIInsights();
 
 if(businessData.length >= 3){
 
@@ -89,7 +89,7 @@ function renderRecordsTable(){
 const tbody = document.getElementById("recordsTableBody");
 if(!tbody) return;
 
-tbody.innerHTML = "";
+tbody.innerHTML="";
 
 businessData.forEach(record=>{
 
@@ -114,7 +114,6 @@ tbody.appendChild(row);
 function updateProgressIndicator(){
 
 const progress = document.getElementById("dataProgress");
-
 if(!progress) return;
 
 const count = businessData.length;
@@ -172,6 +171,69 @@ responsive:true,
 maintainAspectRatio:false
 }
 });
+
+}
+
+
+/* ================= AI INSIGHTS ================= */
+
+function renderAIInsights(){
+
+const aiInsightsSection = document.getElementById("aiInsights");
+if(!aiInsightsSection) return;
+
+if(businessData.length < 1){
+aiInsightsSection.innerHTML="Enter financial data to generate AI insights.";
+return;
+}
+
+const totalRevenue = sum("revenue");
+const totalProfit = sum("profit");
+const margin = getMargin();
+const growth = calculateMonthlyGrowth();
+const volatility = calculateVolatility();
+
+aiInsightsSection.innerHTML = `
+
+<p><strong>Total Revenue:</strong> ${formatCurrency(totalRevenue)}</p>
+<p><strong>Total Profit:</strong> ${formatCurrency(totalProfit)}</p>
+<p><strong>Profit Margin:</strong> ${margin.toFixed(2)}%</p>
+<p><strong>Growth:</strong> ${growth.toFixed(2)}%</p>
+<p><strong>Volatility:</strong> ${volatility.toFixed(2)}%</p>
+
+<br>
+
+<strong>ImpactGrid AI Insight</strong><br><br>
+
+${generateAIInsightText(margin,growth,volatility)}
+
+`;
+
+}
+
+function generateAIInsightText(margin,growth,volatility){
+
+let insight="";
+
+if(growth>15)
+insight+="Revenue growth is strong indicating expansion potential.<br>";
+
+if(growth<5)
+insight+="Growth is slow suggesting the need for revenue strategy improvement.<br>";
+
+if(margin<10)
+insight+="Profit margins are low indicating cost pressure.<br>";
+
+if(margin>20)
+insight+="Profit margins are healthy showing efficient operations.<br>";
+
+if(volatility>30)
+insight+="Revenue volatility is high which increases operational risk.<br>";
+
+if(volatility<15)
+insight+="Revenue patterns appear stable with predictable income.<br>";
+
+return insight;
 
 }
 
@@ -247,7 +309,7 @@ setText("riskInsight",insight);
 }
 
 
-/* ================= IMPACTGRID AI CHAT ================= */
+/* ================= AI CHAT ================= */
 
 function askImpactGridAI(){
 
@@ -275,7 +337,7 @@ if(q.includes("hi") || q.includes("hello")){
 
 output.innerHTML+=`
 <div class="ai-response">
-Hello. I am ImpactGrid AI.<br><br>
+Hello. I am ImpactGrid AI financial analyst.<br><br>
 You can ask for projections like:<br>
 • 3 year projection<br>
 • 5 year projection<br>
@@ -296,7 +358,7 @@ generateAIProjection(years);
 
 output.innerHTML+=`
 <div class="ai-response">
-Generating ${years}-year projection based on your historical revenue growth.
+Generating ${years}-year projection based on historical revenue growth.
 </div>
 `;
 
@@ -316,7 +378,7 @@ Ask for projections such as:<br>
 }
 
 
-/* ================= AI PROJECTION ENGINE ================= */
+/* ================= AI PROJECTION ================= */
 
 function generateAIProjection(years){
 
@@ -336,12 +398,11 @@ let monthsDiff =
 (last.date.getFullYear()-first.date.getFullYear())*12 +
 (last.date.getMonth()-first.date.getMonth());
 
-if(monthsDiff <= 0) monthsDiff = 1;
+if(monthsDiff<=0) monthsDiff=1;
 
 const cagr=Math.pow(last.revenue/first.revenue,1/monthsDiff)-1;
 
 let revenue=last.revenue;
-
 let labels=[];
 let data=[];
 
@@ -364,10 +425,7 @@ data,
 tension:0.3
 }]
 },
-options:{
-responsive:true,
-maintainAspectRatio:false
-}
+options:{responsive:true,maintainAspectRatio:false}
 });
 
 if(explanation){
